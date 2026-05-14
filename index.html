@@ -185,8 +185,20 @@
     .market-card {
       background: #ffffff; border: 1px solid #e5e5e5;
       border-radius: 8px; padding: 24px 16px; text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.18s;
     }
-    .flag { font-size: 28px; margin-bottom: 8px; }
+    .market-card:hover {
+      border-color: #0057FF;
+      box-shadow: 0 6px 24px rgba(0,87,255,0.13);
+      transform: translateY(-3px);
+      background: #f4f8ff;
+    }
+    .flag-img {
+      width: 52px; height: 34px; object-fit: cover;
+      border-radius: 4px; margin-bottom: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
     .m-name { font-size: 14px; font-weight: 600; color: #111111; margin-bottom: 2px; }
     .m-note { font-size: 12px; color: #888888; }
     .ind-pills { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -361,7 +373,7 @@
     Show Experience <span class="arrow">&#9660;</span>
   </button>
   <div class="exp-list hidden" id="exp-list">
-    <div class="exp-card">
+    <div class="exp-card" id="exp-cp">
       <div class="exp-role">Business Development Manager</div>
       <div class="exp-co">CP Partners &middot; Investment Banking</div>
       <div class="exp-desc">Built and managed a 50+ prospect pipeline for mandates valued at $5M to $100M+. Drove C-suite engagement with founders, CEOs, and CFOs across technology, healthcare, and financial services. Maintained 85%+ forecast accuracy using Salesforce CRM.</div>
@@ -373,7 +385,7 @@
       </div>
     </div>
     <div class="exp-card">
-      <div class="exp-role">Business Development &amp; Account Manager</div>
+      <div class="exp-role" id="exp-novatech">Business Development &amp; Account Manager</div>
       <div class="exp-co">Novatech &middot; SaaS &amp; Managed IT</div>
       <div class="exp-desc">Drove 40% year-over-year revenue growth through outbound prospecting across Fortune 1000 and mid-market enterprises. Achieved 85%+ client retention and grew average account value by 25% via structured upsell programs.</div>
       <div class="exp-tags">
@@ -384,7 +396,7 @@
       </div>
     </div>
     <div class="exp-card">
-      <div class="exp-role">Country Sales &amp; Business Development Manager</div>
+      <div class="exp-role" id="exp-medvocation">Country Sales &amp; Business Development Manager</div>
       <div class="exp-co">Medvocation &middot; Healthcare Staffing</div>
       <div class="exp-desc">Expanded the Canadian client base by 50% in 18 months. Improved conversion by 35% by redesigning the sales funnel. Built the UAE pipeline from zero while managing full Canadian revenue accountability.</div>
       <div class="exp-tags">
@@ -395,7 +407,7 @@
       </div>
     </div>
     <div class="exp-card">
-      <div class="exp-role">Project Manager &amp; Business Development Director</div>
+      <div class="exp-role" id="exp-vwp">Project Manager &amp; Business Development Director</div>
       <div class="exp-co">Virtual Workforce Partners &middot; Outsourcing &amp; Staffing</div>
       <div class="exp-desc">Doubled the global client base in 2 years across UK, US, Australia, UAE, and APAC. Managed enterprise accounts with budgets from $100K to $2M. Built referral networks that generated recurring revenue.</div>
       <div class="exp-tags">
@@ -444,28 +456,28 @@
   <div class="section-title">Markets I Work</div>
   <div class="section-sub">Direct sales experience across five international markets.</div>
   <div class="markets-grid">
-    <div class="market-card">
-      <div class="flag">&#127482;&#127480;</div>
+    <div class="market-card" onclick="goToExp('exp-novatech')" title="View US experience">
+      <img class="flag-img" src="https://flagcdn.com/w80/us.png" alt="United States flag" />
       <div class="m-name">United States</div>
       <div class="m-note">Primary market</div>
     </div>
-    <div class="market-card">
-      <div class="flag">&#127462;&#127482;</div>
+    <div class="market-card" onclick="goToExp('exp-vwp')" title="View Australia experience">
+      <img class="flag-img" src="https://flagcdn.com/w80/au.png" alt="Australia flag" />
       <div class="m-name">Australia</div>
       <div class="m-note">Enterprise clients</div>
     </div>
-    <div class="market-card">
-      <div class="flag">&#127464;&#127462;</div>
+    <div class="market-card" onclick="goToExp('exp-medvocation')" title="View Canada experience">
+      <img class="flag-img" src="https://flagcdn.com/w80/ca.png" alt="Canada flag" />
       <div class="m-name">Canada</div>
       <div class="m-note">Healthcare &amp; SaaS</div>
     </div>
-    <div class="market-card">
-      <div class="flag">&#127462;&#127466;</div>
+    <div class="market-card" onclick="goToExp('exp-medvocation')" title="View UAE experience">
+      <img class="flag-img" src="https://flagcdn.com/w80/ae.png" alt="UAE flag" />
       <div class="m-name">UAE / Middle East</div>
       <div class="m-note">Finance &amp; Advisory</div>
     </div>
-    <div class="market-card">
-      <div class="flag">&#127758;</div>
+    <div class="market-card" onclick="goToExp('exp-cp')" title="View APAC experience">
+      <img class="flag-img" src="https://flagcdn.com/w80/sg.png" alt="APAC flag" />
       <div class="m-name">APAC</div>
       <div class="m-note">Institutional BD</div>
     </div>
@@ -598,6 +610,25 @@
 if (window.location.hash) {
   history.replaceState(null, '', window.location.pathname);
   window.scrollTo(0, 0);
+}
+
+function goToExp(id) {
+  const list = document.getElementById('exp-list');
+  const btn = document.querySelector('.exp-toggle-btn');
+  if (list.classList.contains('hidden')) {
+    list.classList.remove('hidden');
+    btn.classList.add('open');
+    btn.innerHTML = 'Hide Experience <span class="arrow">&#9660;</span>';
+  }
+  setTimeout(function() {
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.style.transition = 'box-shadow 0.3s';
+      target.style.boxShadow = '0 0 0 3px #0057FF';
+      setTimeout(function() { target.style.boxShadow = ''; }, 1800);
+    }
+  }, 120);
 }
 
 function toggleExperience(btn) {
