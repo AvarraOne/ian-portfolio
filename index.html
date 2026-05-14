@@ -181,7 +181,7 @@
     .cv-btn:hover { background: #f0f4ff; }
 
     /* MARKETS */
-    .markets-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 40px; }
+    .markets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 16px; margin-bottom: 40px; }
     .market-card {
       background: #ffffff; border: 1px solid #e5e5e5;
       border-radius: 8px; padding: 24px 16px; text-align: center;
@@ -350,7 +350,7 @@
       <div class="stat-lbl">Client Base Expansion</div>
     </div>
     <div>
-      <div class="stat-num">5+</div>
+      <div class="stat-num">7+</div>
       <div class="stat-lbl">Global Markets</div>
     </div>
     <div>
@@ -550,7 +550,7 @@
 <div class="section section-alt" id="markets">
   <div class="section-label">Geography</div>
   <div class="section-title">Markets I Work</div>
-  <div class="section-sub">Direct sales experience across five international markets.</div>
+  <div class="section-sub">Direct sales experience across seven international markets.</div>
   <div class="markets-grid">
     <div class="market-card" onclick="goToExp('exp-novatech')" title="View US experience">
       <img class="flag-img" src="https://flagcdn.com/w80/us.png" alt="United States flag" />
@@ -576,6 +576,16 @@
       <img class="flag-img" src="https://flagcdn.com/w80/sg.png" alt="APAC flag" />
       <div class="m-name">APAC</div>
       <div class="m-note">Institutional BD</div>
+    </div>
+    <div class="market-card" onclick="goToExp('exp-vwp')" title="View UK experience">
+      <img class="flag-img" src="https://flagcdn.com/w80/gb.png" alt="UK flag" />
+      <div class="m-name">United Kingdom</div>
+      <div class="m-note">Enterprise clients</div>
+    </div>
+    <div class="market-card" onclick="goToExp('exp-vwp')" title="View Europe experience">
+      <img class="flag-img" src="https://flagcdn.com/w80/eu.png" alt="Europe flag" />
+      <div class="m-name">Europe</div>
+      <div class="m-note">BD &amp; Partnerships</div>
     </div>
   </div>
   <div class="section-label">Industries</div>
