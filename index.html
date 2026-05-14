@@ -41,6 +41,23 @@
       padding: 80px 48px;
       border-bottom: 1px solid #e5e5e5;
     }
+    .hero-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 48px; flex-wrap: wrap;
+    }
+    .hero-content { flex: 1; min-width: 280px; }
+    .hero-photo {
+      width: 200px; height: 200px; flex-shrink: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #0057FF;
+      box-shadow: 0 8px 32px rgba(0,87,255,0.15);
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    @media (max-width: 700px) {
+      .hero-inner { flex-direction: column-reverse; align-items: flex-start; }
+      .hero-photo { width: 140px; height: 140px; }
+    }
     .hero-tag {
       display: inline-block;
       background: #e8f0ff; color: #0057FF;
@@ -237,6 +254,8 @@
 
 <!-- HERO -->
 <div class="hero">
+  <div class="hero-inner">
+  <div class="hero-content">
   <div class="hero-tag">B2B Sales &amp; Business Development</div>
   <h1>Ian Kenneth<br>Del Pilar</h1>
   <p>12+ years closing enterprise deals across the US, Australia, Canada, Middle East, and APAC. Investment banking to SaaS to healthcare staffing.</p>
@@ -262,6 +281,11 @@
       <div class="stat-lbl">Years in B2B Sales</div>
     </div>
   </div>
+  </div><!-- end hero-content -->
+  <div class="hero-photo">
+    <img src="photo.jpg" alt="Ian Kenneth Del Pilar" />
+  </div>
+  </div><!-- end hero-inner -->
 </div>
 
 <!-- WINS -->
