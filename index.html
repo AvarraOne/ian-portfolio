@@ -30,6 +30,29 @@
       padding: 16px 48px;
       display: flex; justify-content: space-between; align-items: center;
     }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .lang-switcher { position: relative; }
+    .lang-btn {
+      background: none; border: 1.5px solid #e5e5e5;
+      padding: 6px 12px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border-radius: 4px; color: #555555;
+      display: flex; align-items: center; gap: 6px; white-space: nowrap;
+    }
+    .lang-btn:hover { border-color: #0057FF; color: #0057FF; }
+    .lang-dropdown {
+      display: none; position: absolute; right: 0; top: calc(100% + 6px);
+      background: #ffffff; border: 1px solid #e5e5e5;
+      border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      z-index: 300; min-width: 170px; overflow: hidden;
+    }
+    .lang-switcher:hover .lang-dropdown { display: block; }
+    .lang-option {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 16px; font-size: 13px; color: #333333; cursor: pointer;
+    }
+    .lang-option:hover { background: #f0f4ff; color: #0057FF; }
+    .lang-option.active { background: #e8f0ff; color: #0057FF; font-weight: 700; }
+    .lang-option img { width: 20px; height: 13px; object-fit: cover; border-radius: 2px; }
     .nav-name { font-weight: 700; font-size: 15px; color: #111111; text-decoration: none; cursor: pointer; }
     .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a { text-decoration: none; font-size: 14px; color: #555555; }
@@ -325,7 +348,23 @@
     <li><a href="#markets">Markets</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:theiank@hotmail.com" class="nav-btn">Get in touch</a>
+  <div class="nav-right">
+    <a href="mailto:theiank@hotmail.com" class="nav-btn">Get in touch</a>
+    <div class="lang-switcher">
+      <button class="lang-btn">🌐 <span id="lang-label">EN</span> ▾</button>
+      <div class="lang-dropdown">
+        <div class="lang-option active" onclick="switchLang('en')"><img src="https://flagcdn.com/w40/gb.png" alt="EN"> English</div>
+        <div class="lang-option" onclick="switchLang('zh')"><img src="https://flagcdn.com/w40/cn.png" alt="ZH"> 中文</div>
+        <div class="lang-option" onclick="switchLang('ja')"><img src="https://flagcdn.com/w40/jp.png" alt="JA"> 日本語</div>
+        <div class="lang-option" onclick="switchLang('ko')"><img src="https://flagcdn.com/w40/kr.png" alt="KO"> 한국어</div>
+        <div class="lang-option" onclick="switchLang('es')"><img src="https://flagcdn.com/w40/es.png" alt="ES"> Español</div>
+        <div class="lang-option" onclick="switchLang('fr')"><img src="https://flagcdn.com/w40/fr.png" alt="FR"> Français</div>
+        <div class="lang-option" onclick="switchLang('de')"><img src="https://flagcdn.com/w40/de.png" alt="DE"> Deutsch</div>
+        <div class="lang-option" onclick="switchLang('it')"><img src="https://flagcdn.com/w40/it.png" alt="IT"> Italiano</div>
+        <div class="lang-option" onclick="switchLang('nl')"><img src="https://flagcdn.com/w40/nl.png" alt="NL"> Nederlands</div>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -786,11 +825,57 @@ function goToExp(id) {
   }, 120);
 }
 
+let currentLang = 'en';
+const translations = {
+  en:  { heroTag:'B2B Sales · Business Development · Project Management', heroDesc:"Most sales reps master one industry. I've built revenue across seven global markets, led teams of 280+ headcount, and delivered results in four industries over 12 years. I don't just close deals — I manage people, projects, and accounts at scale.", openToWork:'Open to Work · Available Now', btnViewExp:'View Experience', stats:['YoY Revenue Growth','Client Base Expansion','Headcount Managed','Years Experience'], nav:['Impact','Experience','Markets','Contact'], winsTitle:'Numbers That Matter', winsSub:'Verified results from real roles across 12 years.', storyTitle:'My Story', expTitle:'Work History', expSub:'Six roles across investment banking, SaaS, healthcare staffing, outsourcing, and web design. Full details in the CV.', marketsTitle:'Markets I Work', marketsSub:'Direct sales experience across seven international markets.', skillsTitle:'Core Skills', approachTitle:'My Approach', whyTitle:'Why You Should Choose Me', whySub:'Three things that separate me from every other BD candidate on your shortlist.', contactTitle:'Ready to Interview', contactSub:'Open to senior BD, sales leadership, and fractional BDR roles — remote preferred. Available across AU, SG, Dubai, Canada, and the US. Response within 24 hours.', emailBtn:'✉ Email Me', cvCtaTitle:'Want the full details?', cvCtaSub:'Download the complete CV with all role specifics and achievements.', showExp:'Show Experience', hideExp:'Hide Experience' },
+  zh:  { heroTag:'B2B销售 · 业务拓展 · 项目管理', heroDesc:'大多数销售人员精通一个行业。我在12年间跨越七个全球市场、带领280+人团队，在四个行业持续交付成果。我不只是谈成交易——我管理人员、项目和大客户。', openToWork:'正在求职 · 随时可入职', btnViewExp:'查看经历', stats:['年度营收增长','客户基础扩张','管理人员规模','年从业经验'], nav:['亮点成就','工作经历','市场区域','联系我'], winsTitle:'核心数据', winsSub:'12年真实岗位的可验证成果。', storyTitle:'我的故事', expTitle:'工作经历', expSub:'横跨投资银行、SaaS、医疗招聘、外包及网页设计的六段经历。详情见简历。', marketsTitle:'目标市场', marketsSub:'七个国际市场的直接销售经验。', skillsTitle:'核心技能', approachTitle:'我的销售方法', whyTitle:'为何选择我', whySub:'让我在众多候选人中脱颖而出的三点优势。', contactTitle:'期待面试', contactSub:'开放高级BD、销售领导及分散式BDR职位——优先远程。覆盖澳大利亚、新加坡、迪拜、加拿大及美国。24小时内回复。', emailBtn:'✉ 发送邮件', cvCtaTitle:'需要完整详情？', cvCtaSub:'下载包含所有岗位细节和成就的完整简历。', showExp:'查看工作经历', hideExp:'收起工作经历' },
+  ja:  { heroTag:'B2B営業 · ビジネス開発 · プロジェクト管理', heroDesc:'多くの営業担当者は一つの業界しか知りません。私は12年間で7つのグローバル市場を開拓し、280名以上のチームを率い、4つの業界で成果を出し続けてきました。商談を成立させるだけでなく、人材・プロジェクト・大口顧客を大規模に管理します。', openToWork:'転職活動中 · 即入社可能', btnViewExp:'経歴を見る', stats:['年間収益成長率','顧客基盤拡大率','管理人員数','経験年数'], nav:['実績','職歴','市場','お問い合わせ'], winsTitle:'重要な数字', winsSub:'12年間の実際の職歴から検証済みの成果。', storyTitle:'私のストーリー', expTitle:'職歴', expSub:'投資銀行、SaaS、医療スタッフィング、アウトソーシング、ウェブデザインにわたる6つの職歴。', marketsTitle:'対応市場', marketsSub:'7つの国際市場での直接販売経験。', skillsTitle:'コアスキル', approachTitle:'私のアプローチ', whyTitle:'なぜ私を選ぶべきか', whySub:'他のすべてのBD候補者と私を差別化する3つのポイント。', contactTitle:'面接の準備ができています', contactSub:'シニアBD、営業リーダー、フラクショナルBDRポジションを希望——リモート優先。AU・SG・ドバイ・カナダ・米国対応可。24時間以内に返信。', emailBtn:'✉ メールを送る', cvCtaTitle:'詳細をご希望ですか？', cvCtaSub:'すべての職務詳細と実績を含む完全なCVをダウンロードしてください。', showExp:'職歴を表示', hideExp:'職歴を非表示' },
+  ko:  { heroTag:'B2B 영업 · 사업 개발 · 프로젝트 관리', heroDesc:'대부분의 영업 담당자는 하나의 산업만 다룹니다. 저는 12년간 7개 글로벌 시장에서 수익을 창출하고, 280명 이상의 팀을 이끌며, 4개 산업에서 성과를 달성했습니다. 단순히 계약을 성사시키는 것을 넘어, 인력·프로젝트·대형 거래처를 대규모로 관리합니다.', openToWork:'구직 중 · 즉시 입사 가능', btnViewExp:'경력 보기', stats:['연간 매출 성장률','고객 기반 확장','관리 인원','경력 연수'], nav:['성과','경력','시장','연락처'], winsTitle:'중요한 숫자들', winsSub:'12년간 실제 직무에서 검증된 성과.', storyTitle:'나의 이야기', expTitle:'경력 사항', expSub:'투자 은행, SaaS, 의료 인력, 아웃소싱 및 웹 디자인에 걸친 6가지 경력.', marketsTitle:'담당 시장', marketsSub:'7개 국제 시장에서의 직접 영업 경험.', skillsTitle:'핵심 역량', approachTitle:'나의 영업 방식', whyTitle:'왜 저를 선택해야 하는가', whySub:'다른 모든 BD 후보자와 저를 차별화하는 세 가지.', contactTitle:'면접 준비 완료', contactSub:'시니어 BD, 영업 리더십, 프랙셔널 BDR 포지션 지원 가능 — 원격 근무 선호. AU, SG, 두바이, 캐나다, 미국 대응 가능. 24시간 내 답변.', emailBtn:'✉ 이메일 보내기', cvCtaTitle:'상세 내용이 필요하신가요?', cvCtaSub:'모든 직무 세부 사항과 성과가 포함된 전체 CV를 다운로드하세요.', showExp:'경력 보기', hideExp:'경력 닫기' },
+  es:  { heroTag:'Ventas B2B · Desarrollo de Negocios · Gestión de Proyectos', heroDesc:'La mayoría de los vendedores dominan una sola industria. He generado ingresos en siete mercados globales, liderado equipos de más de 280 personas y obtenido resultados en cuatro industrias durante 12 años. No solo cierro negocios — gestiono personas, proyectos y cuentas a gran escala.', openToWork:'En búsqueda activa · Disponible ahora', btnViewExp:'Ver experiencia', stats:['Crecimiento de ingresos anual','Expansión de clientes','Personas gestionadas','Años de experiencia'], nav:['Logros','Experiencia','Mercados','Contacto'], winsTitle:'Números que importan', winsSub:'Resultados verificados de roles reales durante 12 años.', storyTitle:'Mi historia', expTitle:'Trayectoria profesional', expSub:'Seis roles en banca de inversión, SaaS, staffing sanitario, outsourcing y diseño web.', marketsTitle:'Mercados en los que trabajo', marketsSub:'Experiencia de ventas directas en siete mercados internacionales.', skillsTitle:'Competencias clave', approachTitle:'Mi enfoque', whyTitle:'Por qué deberías elegirme', whySub:'Tres cosas que me diferencian de todos los demás candidatos de BD.', contactTitle:'Listo para la entrevista', contactSub:'Abierto a roles senior de BD, liderazgo comercial y BDR fraccional — preferiblemente remoto. Disponible para AU, SG, Dubai, Canadá y EE.UU. Respuesta en 24 horas.', emailBtn:'✉ Enviarme un email', cvCtaTitle:'¿Quieres todos los detalles?', cvCtaSub:'Descarga el CV completo con todas las especificaciones y logros.', showExp:'Ver experiencia', hideExp:'Ocultar experiencia' },
+  fr:  { heroTag:'Ventes B2B · Développement Commercial · Gestion de Projet', heroDesc:"La plupart des commerciaux maîtrisent un seul secteur. J'ai développé le chiffre d'affaires sur sept marchés mondiaux, dirigé des équipes de plus de 280 personnes et obtenu des résultats dans quatre secteurs en 12 ans. Je ne fais pas que conclure des ventes — je gère des équipes, des projets et des comptes d'envergure.", openToWork:"En recherche d'emploi · Disponible maintenant", btnViewExp:"Voir l'expérience", stats:['Croissance CA annuelle','Expansion clientèle','Effectifs gérés',"Années d'expérience"], nav:['Résultats','Expérience','Marchés','Contact'], winsTitle:'Des chiffres qui parlent', winsSub:'Résultats vérifiés issus de postes réels sur 12 ans.', storyTitle:'Mon parcours', expTitle:'Expérience professionnelle', expSub:"Six postes en banque d'investissement, SaaS, staffing médical, outsourcing et design web.", marketsTitle:'Marchés couverts', marketsSub:'Expérience de vente directe sur sept marchés internationaux.', skillsTitle:'Compétences clés', approachTitle:'Ma méthode', whyTitle:'Pourquoi me choisir', whySub:'Trois choses qui me distinguent de tous les autres candidats BD.', contactTitle:"Prêt pour l'entretien", contactSub:"Ouvert aux postes seniors BD, direction commerciale et BDR fractionnel — télétravail de préférence. Disponible pour AU, SG, Dubaï, Canada et USA. Réponse sous 24h.", emailBtn:'✉ M’envoyer un email', cvCtaTitle:'Vous voulez tous les détails ?', cvCtaSub:'Téléchargez le CV complet avec toutes les spécificités et réalisations.', showExp:"Voir l'expérience", hideExp:"Masquer l'expérience" },
+  de:  { heroTag:'B2B-Vertrieb · Business Development · Projektmanagement', heroDesc:'Die meisten Vertriebsmitarbeiter kennen nur eine Branche. Ich habe in 12 Jahren auf sieben globalen Märkten Umsatz generiert, Teams mit über 280 Mitarbeitern geleitet und in vier Branchen Ergebnisse erzielt. Ich schließe nicht nur Deals ab — ich manage Menschen, Projekte und Schlüsselkunden in großem Maßstab.', openToWork:'Auf Jobsuche · Sofort verfügbar', btnViewExp:'Erfahrung ansehen', stats:['Jährl. Umsatzwachstum','Kundenbasis-Wachstum','Mitarbeiter geführt','Jahre Erfahrung'], nav:['Erfolge','Erfahrung','Märkte','Kontakt'], winsTitle:'Zahlen, die zählen', winsSub:'Verifizierte Ergebnisse aus echten Positionen über 12 Jahre.', storyTitle:'Meine Geschichte', expTitle:'Berufserfahrung', expSub:'Sechs Positionen in Investmentbanking, SaaS, Healthcare-Staffing, Outsourcing und Webdesign.', marketsTitle:'Meine Märkte', marketsSub:'Direkte Vertriebserfahrung in sieben internationalen Märkten.', skillsTitle:'Kernkompetenzen', approachTitle:'Mein Ansatz', whyTitle:'Warum Sie mich wählen sollten', whySub:'Drei Dinge, die mich von allen anderen BD-Kandidaten unterscheiden.', contactTitle:'Bereit für das Interview', contactSub:'Offen für Senior-BD-, Vertriebsführungs- und fraktionale BDR-Rollen — Remote bevorzugt. Verfügbar für AU, SG, Dubai, Kanada und USA. Antwort innerhalb von 24 Stunden.', emailBtn:'✉ E-Mail senden', cvCtaTitle:'Alle Details gewünscht?', cvCtaSub:'Laden Sie den vollständigen Lebenslauf herunter.', showExp:'Erfahrung anzeigen', hideExp:'Erfahrung ausblenden' },
+  it:  { heroTag:'Vendite B2B · Sviluppo Commerciale · Project Management', heroDesc:'La maggior parte dei venditori conosce un solo settore. Ho generato fatturato in sette mercati globali, guidato team di oltre 280 persone e ottenuto risultati in quattro settori in 12 anni. Non mi limito a chiudere trattative — gestisco persone, progetti e grandi account.', openToWork:'In cerca di lavoro · Disponibile subito', btnViewExp:"Vedi l'esperienza", stats:['Crescita fatturato annuo','Espansione clientela','Risorse gestite','Anni di esperienza'], nav:['Risultati','Esperienza','Mercati','Contatti'], winsTitle:'I numeri che contano', winsSub:'Risultati verificati da ruoli reali in 12 anni.', storyTitle:'La mia storia', expTitle:'Esperienza professionale', expSub:'Sei ruoli in investment banking, SaaS, staffing sanitario, outsourcing e web design.', marketsTitle:'Mercati di riferimento', marketsSub:'Esperienza di vendita diretta in sette mercati internazionali.', skillsTitle:'Competenze chiave', approachTitle:'Il mio approccio', whyTitle:'Perché scegliermi', whySub:'Tre cose che mi distinguono da tutti gli altri candidati BD.', contactTitle:'Pronto per il colloquio', contactSub:'Disponibile per ruoli senior BD, leadership commerciale e BDR frazionale — preferibilmente da remoto. Disponibile per AU, SG, Dubai, Canada e USA. Risposta entro 24 ore.', emailBtn:'✉ Scrivimi', cvCtaTitle:'Vuoi tutti i dettagli?', cvCtaSub:'Scarica il CV completo con tutte le specifiche e i risultati.', showExp:'Vedi esperienza', hideExp:'Nascondi esperienza' },
+  nl:  { heroTag:'B2B-verkoop · Bedrijfsontwikkeling · Projectmanagement', heroDesc:'De meeste verkopers beheersen slechts één branche. In 12 jaar heb ik omzet gegenereerd in zeven wereldmarkten, teams van 280+ medewerkers geleid en resultaten behaald in vier industrieën. Ik sluit niet alleen deals — ik beheer mensen, projecten en grote accounts op grote schaal.', openToWork:'Op zoek naar werk · Direct beschikbaar', btnViewExp:'Ervaring bekijken', stats:['Jaarlijkse omzetgroei','Uitbreiding klantenbestand','Beheerde medewerkers','Jaar ervaring'], nav:['Prestaties','Ervaring','Markten','Contact'], winsTitle:'Cijfers die tellen', winsSub:'Geverifieerde resultaten uit echte functies over 12 jaar.', storyTitle:'Mijn verhaal', expTitle:'Werkervaring', expSub:'Zes functies in investment banking, SaaS, healthcare staffing, outsourcing en webdesign.', marketsTitle:'Markten waar ik werk', marketsSub:'Directe verkoopervaring in zeven internationale markten.', skillsTitle:'Kernvaardigheden', approachTitle:'Mijn aanpak', whyTitle:'Waarom u voor mij moet kiezen', whySub:'Drie dingen die mij onderscheiden van alle andere BD-kandidaten.', contactTitle:'Klaar voor gesprek', contactSub:'Open voor senior BD-, salesleiderschap- en fractionele BDR-rollen — bij voorkeur remote. Beschikbaar voor AU, SG, Dubai, Canada en VS. Reactie binnen 24 uur.', emailBtn:'✉ E-mail sturen', cvCtaTitle:'Wil je alle details?', cvCtaSub:'Download het volledige CV met alle functiebeschrijvingen en prestaties.', showExp:'Ervaring tonen', hideExp:'Ervaring verbergen' }
+};
+const langLabels = {en:'EN',zh:'中文',ja:'日本語',ko:'한국어',es:'ES',fr:'FR',de:'DE',it:'IT',nl:'NL'};
+
+function switchLang(code) {
+  currentLang = code;
+  const t = translations[code];
+  document.getElementById('lang-label').textContent = langLabels[code];
+  document.querySelectorAll('.lang-option').forEach((el,i) => el.classList.toggle('active', Object.keys(translations)[i] === code));
+  document.querySelector('.hero-tag').textContent = t.heroTag;
+  document.querySelector('.hero-content > p').textContent = t.heroDesc;
+  document.querySelector('.open-to-work').textContent = t.openToWork;
+  document.querySelector('.btn-blue').textContent = t.btnViewExp;
+  document.querySelectorAll('.stat-lbl').forEach((el,i) => { if(t.stats[i]) el.textContent = t.stats[i]; });
+  document.querySelectorAll('.nav-links a').forEach((el,i) => { if(t.nav[i]) el.textContent = t.nav[i]; });
+  document.querySelector('#wins .section-title').textContent = t.winsTitle;
+  document.querySelector('#wins .section-sub').textContent = t.winsSub;
+  document.querySelector('#story .section-title').textContent = t.storyTitle;
+  document.querySelector('#experience .section-title').textContent = t.expTitle;
+  document.querySelector('#experience .section-sub').textContent = t.expSub;
+  document.querySelector('#markets .section-title').textContent = t.marketsTitle;
+  document.querySelector('#markets .section-sub').textContent = t.marketsSub;
+  document.querySelector('#skills .section-title').textContent = t.skillsTitle;
+  document.querySelector('#approach .section-title').textContent = t.approachTitle;
+  document.querySelector('#why .section-title').textContent = t.whyTitle;
+  document.querySelector('#why .section-sub').textContent = t.whySub;
+  document.querySelector('#contact .section-title').textContent = t.contactTitle;
+  document.querySelector('.contact-sub').textContent = t.contactSub;
+  document.querySelector('.c-link-primary').textContent = t.emailBtn;
+  document.querySelector('.cv-cta-left h3').textContent = t.cvCtaTitle;
+  document.querySelector('.cv-cta-left p').textContent = t.cvCtaSub;
+  const tb = document.querySelector('.exp-toggle-btn');
+  if(tb) tb.innerHTML = (tb.classList.contains('open') ? t.hideExp : t.showExp) + ' <span class="arrow">&#9660;</span>';
+}
+
 function toggleExperience(btn) {
   const list = document.getElementById('exp-list');
   const isHidden = list.classList.toggle('hidden');
   btn.classList.toggle('open', !isHidden);
-  btn.innerHTML = (isHidden ? 'Show Experience' : 'Hide Experience') + ' <span class="arrow">&#9660;</span>';
+  const t = translations[currentLang];
+  btn.innerHTML = (isHidden ? t.showExp : t.hideExp) + ' <span class="arrow">&#9660;</span>';
 }
 
 function downloadCV() {
