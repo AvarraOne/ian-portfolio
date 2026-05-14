@@ -220,6 +220,46 @@
     .s-bar { width: 160px; height: 4px; background: #e5e5e5; border-radius: 2px; flex-shrink: 0; }
     .s-fill { height: 100%; background: #0057FF; border-radius: 2px; }
 
+    /* MY STORY */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .story-text p { font-size: 16px; color: #444444; line-height: 1.85; margin-bottom: 18px; }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-text strong { color: #111111; }
+    .story-timeline { display: flex; flex-direction: column; gap: 0; }
+    .story-step {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding-bottom: 28px; position: relative;
+    }
+    .story-step:not(:last-child)::before {
+      content: ''; position: absolute;
+      left: 15px; top: 32px; bottom: 0;
+      width: 2px; background: #e5e5e5;
+    }
+    .step-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #e8f0ff; border: 2px solid #0057FF;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 11px; font-weight: 800; color: #0057FF;
+    }
+    .step-body { padding-top: 4px; }
+    .step-role { font-size: 14px; font-weight: 700; color: #111111; margin-bottom: 2px; }
+    .step-co { font-size: 13px; color: #0057FF; font-weight: 600; margin-bottom: 4px; }
+    .step-lesson { font-size: 13px; color: #666666; line-height: 1.6; }
+    @media (max-width: 900px) { .story-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* WHY IAN */
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .why-card {
+      background: #ffffff; border: 1px solid #e5e5e5;
+      border-radius: 8px; padding: 32px 28px;
+      border-top: 4px solid #0057FF;
+    }
+    .why-icon { font-size: 28px; margin-bottom: 14px; }
+    .why-title { font-size: 17px; font-weight: 700; color: #111111; margin-bottom: 10px; }
+    .why-text { font-size: 14px; color: #555555; line-height: 1.75; }
+    .why-proof { margin-top: 14px; font-size: 13px; font-weight: 600; color: #0057FF; }
+    @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+
     /* APPROACH */
     .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .approach-card {
@@ -295,7 +335,7 @@
   <div class="hero-tag">B2B Sales &amp; Business Development</div>
   <div class="open-to-work">Open to Work &mdash; Available Now</div>
   <h1>Ian Kenneth<br>Del Pilar</h1>
-  <p>12+ years closing enterprise deals across the US, Australia, Canada, Middle East, and APAC. Investment banking to SaaS to healthcare staffing.</p>
+  <p>Most sales reps master one industry. I've built revenue across five global markets and four industries in 12 years — and delivered every time. If you need someone who hits the ground running and closes, that's exactly what I do.</p>
   <div class="hero-btns">
     <a href="#experience" class="btn-blue">View Experience</a>
     <button class="btn-outline" onclick="downloadCV()">Download CV</button>
@@ -360,6 +400,62 @@
       <div class="win-num">$100M+</div>
       <div class="win-title">Deal Size Range</div>
       <div class="win-desc">Qualified and managed investment banking mandates from $5M to $100M+ covering M&amp;A, capital advisory, and fundraising.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MY STORY -->
+<div class="section" id="story">
+  <div class="section-label">The Journey</div>
+  <div class="section-title">My Story</div>
+  <div class="story-grid">
+    <div class="story-text">
+      <p>I didn't start in a corner office. I started on the phones in fintech — cold calling merchants, learning to handle rejection, learning what makes people say yes. That foundation taught me something most salespeople never get: <strong>the discipline to work a system and the instinct to know when to deviate from it.</strong></p>
+      <p>From there, I took that same hunger into outsourcing, then healthcare staffing, then SaaS, then investment banking. Every industry was a new language — new buyers, new objections, new stakes. Most reps never cross one vertical. I crossed four, on five continents, and grew revenue in every single one.</p>
+      <p>What I learned is that the fundamentals of sales never change. <strong>People buy from people they trust, who understand their problem, and who make the decision feel obvious.</strong> I built my career on that truth — and the numbers are proof it works.</p>
+      <p>I'm not looking for a place to coast. I'm looking for a team that wants a closer who brings energy, structure, and results from day one.</p>
+    </div>
+    <div class="story-timeline">
+      <div class="story-step">
+        <div class="step-dot">01</div>
+        <div class="step-body">
+          <div class="step-role">Sales &amp; BD Executive</div>
+          <div class="step-co">MSC &middot; Fintech &amp; Payments</div>
+          <div class="step-lesson">Learned the grind. Built the discipline. 20% YoY growth from pure outbound hustle.</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-dot">02</div>
+        <div class="step-body">
+          <div class="step-role">BD Director &amp; Project Manager</div>
+          <div class="step-co">Virtual Workforce Partners &middot; Outsourcing</div>
+          <div class="step-lesson">Went global. Doubled the client base across UK, US, AU, UAE and APAC in 2 years.</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-dot">03</div>
+        <div class="step-body">
+          <div class="step-role">Country Sales &amp; BD Manager</div>
+          <div class="step-co">Medvocation &middot; Healthcare Staffing</div>
+          <div class="step-lesson">Went consultative. Grew Canada 50%, built UAE from zero, improved conversion 35%.</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-dot">04</div>
+        <div class="step-body">
+          <div class="step-role">BD &amp; Account Manager</div>
+          <div class="step-co">Novatech &middot; SaaS &amp; Managed IT</div>
+          <div class="step-lesson">Went enterprise. 40% YoY growth. Fortune 1000 accounts. Structured upsell programs.</div>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="step-dot">05</div>
+        <div class="step-body">
+          <div class="step-role">Business Development Manager</div>
+          <div class="step-co">CP Partners &middot; Investment Banking</div>
+          <div class="step-lesson">Went to the top. $5M–$100M+ mandates. C-suite relationships. 85%+ forecast accuracy.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -544,6 +640,33 @@
       <div class="ap-num">03</div>
       <div class="ap-title">Systems, Not Sprints</div>
       <p class="ap-text">Consistent pipeline comes from repeatable processes. I build outbound systems that produce results every week, not just at end-of-quarter.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHY IAN -->
+<div class="section" id="why">
+  <div class="section-label">Why Ian</div>
+  <div class="section-title">Why You Should Choose Me</div>
+  <div class="section-sub">Three things that separate me from every other BD candidate on your shortlist.</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <div class="why-title">I Adapt Where Others Don't</div>
+      <div class="why-text">Most salespeople are built for one industry, one buyer type, one market. I've sold fintech to US merchants, outsourcing to enterprise clients in 5 countries, healthcare staffing in Canada and the UAE, SaaS to Fortune 1000s, and investment banking mandates worth $100M+. Every time I entered a new vertical, I didn't just survive — I grew revenue.</div>
+      <div class="why-proof">→ 4 industries. 5 markets. Growth in every single one.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📊</div>
+      <div class="why-title">I Deliver Numbers, Not Narratives</div>
+      <div class="why-text">I don't talk about what I'm going to do — I show what I've already done. 40% YoY revenue growth. 50% client base expansion in 18 months. 85%+ pipeline forecast accuracy. 35% improvement in lead-to-client conversion. These aren't estimates. They're results from real roles with real accountability attached to them.</div>
+      <div class="why-proof">→ Every claim on this page is backed by a real outcome.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚙️</div>
+      <div class="why-title">I Build Systems That Outlast Me</div>
+      <div class="why-text">Any rep can have a good quarter. I build the process that makes the next 12 quarters repeatable. Referral networks that generated recurring revenue at VWP. Outbound systems that kept the pipeline full at Novatech. Funnel redesigns that cut friction at Medvocation. I don't just hit targets — I leave teams better than I found them.</div>
+      <div class="why-proof">→ I'm not a sprint. I'm a system.</div>
     </div>
   </div>
 </div>
